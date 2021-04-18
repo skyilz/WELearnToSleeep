@@ -11,7 +11,7 @@ import requests
 
 def login():
     '''登录，cookie由session处理
-
+    
     如果登录失败直接退出
     '''
     print(dedent('''\
@@ -111,7 +111,6 @@ def input_time():
     print(dedent('''\
         模式1:每个练习增加指定学习时长，请直接输入时间
         如:希望每个练习增加30秒，则输入 30
-
         模式2:每个练习增加随机时长，请输入时间上下限并用英文逗号隔开
         如:希望每个练习增加10～30秒，则输入 10,30
     '''))
@@ -149,7 +148,7 @@ def output_results():
         **********  Created By Avenshy & SSmJaE  **********
                         Version : 0.3.0
            基于GPL3.0，完全开源，免费，禁止二次倒卖或商用
-                    经Skyil改动后，适用于只刷课文
+                    经改动后，适用于只刷课文
            https://www.github.com/Avenshy/WELearnToSleeep
                         仅供学习，勿滥用
         ***************************************************
@@ -167,6 +166,7 @@ async def simulate(learningTime: int, chapter: Dict):
     }
 
     scoid = chapter['id']
+    # print(scoid)
     commonData = {
         'uid': uid,
         'cid': cid,
