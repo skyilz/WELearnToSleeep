@@ -18,6 +18,7 @@ def login():
         **********  Created By Avenshy & SSmJaE  **********
                         Version : 0.3.0
            基于GPL3.0，完全开源，免费，禁止二次倒卖或商用
+                    经改动后，适用于只刷课文
            https://www.github.com/Avenshy/WELearnToSleeep
                         仅供学习，勿滥用
         ***************************************************
@@ -60,6 +61,7 @@ def get_target_course_info():
         }
     )
     courseList = response.json()['clist']
+    print('\n')
     for index, course in enumerate(courseList, start=1):
         print('[id:{:>2d}]  完成度 {:>3d}%  {}'.format(index, course['per'], course['name']))
 
@@ -147,6 +149,7 @@ def output_results():
         **********  Created By Avenshy & SSmJaE  **********
                         Version : 0.3.0
            基于GPL3.0，完全开源，免费，禁止二次倒卖或商用
+                    经Skyil改动后，适用于只刷课文
            https://www.github.com/Avenshy/WELearnToSleeep
                         仅供学习，勿滥用
         ***************************************************
@@ -274,6 +277,7 @@ async def heartbeat():
 async def watcher():
     global maxLearningTime
 
+    onlytext = int(input('\n请输入数字，表示是否只刷两篇课文（1表示只刷课文，其他表示全部刷）: '))
     while True:
         get_target_course_info()
         choose_unit()
@@ -301,7 +305,18 @@ async def watcher():
                 if learningTime > maxLearningTime:
                     maxLearningTime = learningTime
 
-                tasks.append(asyncio.create_task(simulate(learningTime, chapter)))
+                # print(chapter['id'])
+                res = re.match(r'm-\d-\d-(\d*)', chapter['id'])
+                rss = res.group(1)
+                # print(rss)
+                rss = int(rss)
+                if onlytext == 1:
+                    if rss == 4:
+                        tasks.append(asyncio.create_task(simulate(learningTime, chapter)))
+                    elif rss == 16:
+                        tasks.append(asyncio.create_task(simulate(learningTime, chapter)))
+                else:
+                    tasks.append(asyncio.create_task(simulate(learningTime, chapter)))
 
         await heartbeat()
         [await task for task in tasks]
