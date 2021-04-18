@@ -57,6 +57,7 @@ def get_target_course_info():
     response = session.get(
         'https://welearn.sflep.com/ajax/authCourse.aspx?action=gmc',
         headers={
+            "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; Mi 10 Pro Build/RKQ1.200826.002)",
             'Referer': 'https://welearn.sflep.com/2019/student/index.aspx'
         }
     )
@@ -71,6 +72,7 @@ def get_target_course_info():
     response = session.get(
         'https://welearn.sflep.com/2019/student/course_info.aspx?cid=' + cid,
         headers={
+            "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; Mi 10 Pro Build/RKQ1.200826.002)",
             'Referer': 'https://welearn.sflep.com/2019/student/index.aspx'
         }
     )
@@ -86,6 +88,7 @@ def get_target_course_info():
             'uid': uid
         },
         headers={
+            "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; Mi 10 Pro Build/RKQ1.200826.002)",
             'Referer': 'https://welearn.sflep.com/2019/student/course_info.aspx'
         }
     )
@@ -162,6 +165,7 @@ async def simulate(learningTime: int, chapter: Dict):
     print(f"""已学 : {chapter['learntime']} 将学 : {learningTime}""")
 
     commonHeaders = {
+        "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; Mi 10 Pro Build/RKQ1.200826.002)",
         'Referer': 'https://welearn.sflep.com/student/StudyCourse.aspx'
     }
 
@@ -295,6 +299,7 @@ async def watcher():
             response = session.get(
                 f"https://welearn.sflep.com/ajax/StudyStat.aspx?action=scoLeaves&cid={cid}&uid={uid}&unitidx={str(unit)}&classid={classid}",
                 headers={
+                    "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 11; Mi 10 Pro Build/RKQ1.200826.002)",
                     'Referer': 'https://welearn.sflep.com/2019/student/course_info.aspx?cid=' + cid
                 }
             )
